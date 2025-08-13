@@ -1,47 +1,39 @@
 # Task 1: Student Score Prediction
 
 ## 📌 Description
-This project aims to build a model to **predict students' exam scores** based on various factors such as study hours, sleep, participation, and other related features.
-
-**Dataset:** [Student Performance Factors (Kaggle)](https://www.kaggle.com/datasets)
-
-### Objectives:
-1. Perform **data cleaning** and basic **EDA** (visualization) to understand the dataset.
-2. Split the dataset into **training** and **testing** sets.
-3. Train a **Linear Regression** model to estimate the final score.
-4. Visualize predictions and evaluate model performance.
-5. Explore a **Polynomial Regression** model and compare its performance.
-6. Experiment with **different feature combinations** (adding/removing features).
+This project uses the **Student Performance Factors** dataset from Kaggle to predict students' exam scores based on various academic, social, and lifestyle factors.  
+The aim is to explore the most influential variables and build regression models to estimate the final score.
 
 ---
 
-## 🛠 Tools & Libraries
-- **Python**
-- **Pandas** – data manipulation
-- **Matplotlib** – visualization
-- **Scikit-learn** – modeling & evaluation
+## 📊 Dataset
+**Source**: [Kaggle - Student Performance Factors](https://www.kaggle.com/datasets/lainguyn123/student-performance-fact)  
+**Target variable**: `Exam_Score`  
+**Features**: Study hours, attendance, previous scores, parental involvement, sleep hours, etc.
 
 ---
 
-## 📊 Workflow
+## 🛠 Steps
 1. **Data Cleaning**
-   - Removed missing values
-   - Encoded categorical variables using `pd.get_dummies`
-   - Scaled numerical features using `StandardScaler`
+   - Handled missing values.
+   - Converted categorical variables to numeric using  encoding.
 
-2. **EDA**
-   - Checked correlations between features and target
-   - Visualized distributions and relationships
+2. **Exploratory Data Analysis (EDA)**
+   - Visualized distributions and correlations.
+   - Identified key trends in study hours, attendance, and other factors.
 
-3. **Modeling**
-   - **Linear Regression** as a baseline model
-   - **Polynomial Regression** (degree=2) for capturing non-linear patterns
-   - Feature combination testing (removing `sleep` and `participation`)
+3. **Model Building**
+   - Split dataset into **80% training** and **20% testing**.
+   - Scaled features using `StandardScaler`.
+   - Trained:
+     - **Linear Regression**
+     - **Polynomial Regression (degree=2)**
+     - **Linear Regression without `Sleep_Hours` and `Participation`**
 
 4. **Evaluation Metrics**
-   - **MAE**: Mean Absolute Error
-   - **MSE**: Mean Squared Error
-   - **R² Score**: Coefficient of Determination
+   - **MAE** (Mean Absolute Error)  
+   - **MSE** (Mean Squared Error)  
+   - **R² Score** (Coefficient of Determination)
 
 ---
 
@@ -49,22 +41,36 @@ This project aims to build a model to **predict students' exam scores** based on
 
 | Model | MAE | MSE | R² Score |
 |-------|-----|-----|----------|
-| Linear Regression | 2.9548 | 18.2978 | 0.4882 |
-| Polynomial Regression (deg=2) | 1.1916 | 3.9474 | 0.8896 |
-| Linear Regression (Without sleep/participation) | 2.9464 | 18.2404 | 0.4898 |
+| Linear Regression | 0.450 | 3.26 | 0.770 |
+| Polynomial Regression (deg=2) | 0.640 | 3.58 | 0.746 |
+| Linear Regression (Without Sleep/Participation) | 0.449 | 3.25 | 0.770 |
+
+💡 **Observation**: Removing `Sleep_Hours` and `Participation` had almost no effect on model performance. Polynomial regression slightly reduced accuracy.
 
 ---
 
-## 📌 Insights
-- **Polynomial Regression** significantly outperformed Linear Regression with an **R² of ~0.89** compared to ~0.49.
-- Removing `sleep` and `participation` had almost no effect on model performance.
-- Learning Curve analysis showed **no severe overfitting** for the polynomial model.
+## 🔍 Bonus - Feature Importance Analysis
+Using **Permutation Importance**:
+- **Most influential features**:  
+  - Attendance (`0.75`)  
+  - Hours_Studied (`0.45`)  
+  - Access_to_Resources_Low, Parental_Involvement_Low (`≈ 0.09`)
+  
+- **Least influential features**:  
+  - Sleep_Hours (`≈ 0.00`)  
+  - Gender_Male (`≈ 0.00`)  
+  - School_Type_Public (`≈ 0.00`)
+
+✅ This confirms that sleep and participation have minimal predictive power for this dataset.
 
 ---
 
-## 🚀 Bonus Work
-- Implemented **Polynomial Regression** and achieved a large performance boost.
-- Experimented with **feature selection** to analyze importance and impact.
-
+## 📊 Feature Importance Chart
+![Feature Importance Chart](feature_importance.png)
 ---
 
+## 🧰 Tools & Libraries
+- Python  
+- Pandas  
+- Matplotlib  
+- Scikit-learn
