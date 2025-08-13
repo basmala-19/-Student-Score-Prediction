@@ -68,9 +68,3 @@ This project aims to build a model to **predict students' exam scores** based on
 
 ---
 
-## 📷 Visualization
-(Learning Curve plot for Polynomial Regression)
-
----
-
-## 📂 Project Structure
